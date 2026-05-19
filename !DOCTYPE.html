@@ -1,184 +1,121 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Levantamiento de Usuarios Irregulares</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Usuarios Ilegales</title>
+
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
     body {
-      margin: 0;
-      background: #f4f6f8;
-      color: #222;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
     }
 
-    header {
-      background: #0b3d2e;
-      color: white;
-      padding: 18px;
+    .contenedor {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    h1 {
       text-align: center;
     }
 
-    main {
-      max-width: 900px;
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-
-    h2 {
-      color: #0b3d2e;
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 6px;
-    }
-
     label {
-      font-weight: bold;
       display: block;
-      margin-top: 12px;
+      margin-top: 15px;
+      font-weight: bold;
     }
 
-    input, select, textarea, button {
+    input, textarea, button {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
+      border-radius: 5px;
       border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 80px;
     }
 
     button {
-      background: #0b3d2e;
+      background: green;
       color: white;
       border: none;
-      cursor: pointer;
-      font-weight: bold;
-      margin-top: 15px;
-    }
-
-    button:hover {
-      background: #116247;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 15px;
-    }
-
-    .photo-card {
-      border: 1px solid #ddd;
-      padding: 12px;
-      border-radius: 10px;
-      background: #fafafa;
-    }
-
-    .photo-preview {
-      width: 100%;
-      min-height: 150px;
-      border: 1px dashed #999;
-      border-radius: 8px;
-      margin-top: 10px;
-      object-fit: cover;
-      display: none;
-    }
-
-    .actions {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
       margin-top: 20px;
+      cursor: pointer;
     }
 
-    .secondary {
-      background: #555;
-    }
-
-    .danger {
-      background: #9b1c1c;
-    }
-
-    .note {
-      background: #fff7d6;
-      border-left: 5px solid #d6a800;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      font-size: 14px;
+    img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Levantamiento de Usuarios Irregulares</h1>
-    <p>Registro de inspección técnica en campo</p>
-  </header>
 
-  <main>
-    <div class="note">
-      Esta aplicación funciona desde el navegador. Para usar cámara en celular, súbala a GitHub Pages o ejecútela en un sitio HTTPS.
-    </div>
+<div class="contenedor">
 
-    <h2>Datos generales</h2>
-    <div class="grid">
-      <div>
-        <label>Fecha</label>
-        <input type="date" id="fecha" />
-      </div>
-      <div>
-        <label>Hora</label>
-        <input type="time" id="hora" />
-      </div>
-      <div>
-        <label>Inspector / Supervisor</label>
-        <input type="text" id="inspector" placeholder="Nombre del responsable" />
-      </div>
-      <div>
-        <label>Cuadrilla</label>
-        <input type="text" id="cuadrilla" placeholder="Ej. IMECC PES 1" />
-      </div>
-    </div>
+  <h1>Registro de Usuario Ilegal</h1>
 
-    <h2>Ubicación del usuario</h2>
-    <div class="grid">
-      <div>
-        <label>Departamento</label>
-        <input type="text" id="departamento" placeholder="Ej. Olancho" />
-      </div>
-      <div>
-        <label>Municipio</label>
-        <input type="text" id="municipio" placeholder="Ej. Juticalpa" />
-      </div>
-      <div>
-        <label>Barrio / Aldea / Colonia</label>
-        <input type="text" id="zona" />
-      </div>
-      <div>
-        <label>Referencia</label>
-        <input type="text" id="referencia" placeholder="Punto de referencia" />
-      </div>
-    </div>
+  <label>Nombre del inspector</label>
+  <input type="text" id="inspector">
 
-    <button type="button" onclick="obtenerUbicacion()">Obtener ubicación GPS</button>
+  <label>Ubicación</label>
+  <input type="text" id="ubicacion">
 
-    <div class="grid">
-      <div>
-        <label>Latitud</label>
-        <input type="text" id="latitud" readonly />
-      </div>
-      <div>
-        <label>Longitud</label>
-        <input type="text" id="longitud" readonly />
-      </div>
-    </
+  <label>Observaciones</label>
+  <textarea id="observaciones"></textarea>
+
+  <label>Foto identidad frente</label>
+  <input type="file" accept="image/*" capture="environment" onchange="mostrar(event, 'img1')">
+  <img id="img1">
+
+  <label>Foto identidad reverso</label>
+  <input type="file" accept="image/*" capture="environment" onchange="mostrar(event, 'img2')">
+  <img id="img2">
+
+  <label>Foto fachada</label>
+  <input type="file" accept="image/*" capture="environment" onchange="mostrar(event, 'img3')">
+  <img id="img3">
+
+  <label>Foto base medidor</label>
+  <input type="file" accept="image/*" capture="environment" onchange="mostrar(event, 'img4')">
+  <img id="img4">
+
+  <button onclick="guardar()">Guardar Registro</button>
+
+</div>
+
+<script>
+
+function mostrar(evento, id) {
+  const archivo = evento.target.files[0];
+  const lector = new FileReader();
+
+  lector.onload = function(e) {
+    document.getElementById(id).src = e.target.result;
+  }
+
+  lector.readAsDataURL(archivo);
+}
+
+function guardar() {
+
+  const datos = {
+    inspector: document.getElementById('inspector').value,
+    ubicacion: document.getElementById('ubicacion').value,
+    observaciones: document.getElementById('observaciones').value,
+    fecha: new Date()
+  }
+
+  localStorage.setItem('registro', JSON.stringify(datos));
+
+  alert('Registro guardado correctamente');
+}
+
+</script>
+
+</body>
+</html>
