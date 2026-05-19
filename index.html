@@ -2,18 +2,120 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Saludo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Usuarios Ilegales</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+
+    .contenedor {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: green;
+      color: white;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    img {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
 
-  <h1 id="saludo"></h1>
+<div class="contenedor">
 
-  <script>
-    let nombre = prompt("Ingrese su nombre:");
+  <h1>Registro de Usuario Ilegal</h1>
 
-    document.getElementById("saludo").innerHTML =
-      "Hola, " + nombre + ". Bienvenido.";
-  </script>
+  <label>Nombre del inspector</label>
+  <input type="text" id="inspector">
+
+  <label>Ubicación</label>
+  <input type="text" id="ubicacion">
+
+  <label>Observaciones</label>
+  <textarea id="observaciones"></textarea>
+
+  <label>Foto identidad frente</label>
+  <input type="file" accept="image/*" capture="environment" onchange="mostrar(event, 'img1')">
+  <img id="img1">
+
+  <label>Foto identidad reverso</label>
+  <input type="file" accept="image/*" capture="environment" onchange="mostrar(event, 'img2')">
+  <img id="img2">
+
+  <label>Foto fachada</label>
+  <input type="file" accept="image/*" capture="environment" onchange="mostrar(event, 'img3')">
+  <img id="img3">
+
+  <label>Foto base medidor</label>
+  <input type="file" accept="image/*" capture="environment" onchange="mostrar(event, 'img4')">
+  <img id="img4">
+
+  <button onclick="guardar()">Guardar Registro</button>
+
+</div>
+
+<script>
+
+function mostrar(evento, id) {
+  const archivo = evento.target.files[0];
+  const lector = new FileReader();
+
+  lector.onload = function(e) {
+    document.getElementById(id).src = e.target.result;
+  }
+
+  lector.readAsDataURL(archivo);
+}
+
+function guardar() {
+
+  const datos = {
+    inspector: document.getElementById('inspector').value,
+    ubicacion: document.getElementById('ubicacion').value,
+    observaciones: document.getElementById('observaciones').value,
+    fecha: new Date()
+  }
+
+  localStorage.setItem('registro', JSON.stringify(datos));
+
+  alert('Registro guardado correctamente');
+}
+
+</script>
 
 </body>
 </html>
